@@ -27,10 +27,27 @@ class AdressBox extends StatelessWidget {
           size: 20,
         ),
         Expanded(
-            child: Padding(
-          padding: const EdgeInsets.only(left: 5.0),
-          child: Text('Livrer à : ${user.name} - ${user.address}'),
-        ))
+          child: Padding(
+            padding: const EdgeInsets.only(left: 5.0),
+            child: Text(
+              'Livrer à : ${user.name} - ${user.address}',
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.only(
+            left: 5,
+            top: 2,
+          ),
+          child: Icon(
+            Icons.arrow_drop_down_outlined,
+            size: 18,
+          ),
+        )
       ]),
     );
   }

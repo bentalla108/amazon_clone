@@ -1,5 +1,8 @@
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/features/home/widgets/adress.dart';
+import 'package:amazon_clone/features/home/widgets/carousel_image.dart';
+import 'package:amazon_clone/features/home/widgets/deal_of_day.dart';
+import 'package:amazon_clone/features/home/widgets/top_categories.dart';
 
 import 'package:flutter/material.dart';
 
@@ -98,12 +101,12 @@ class _HomeScreenState extends State<HomeScreen> {
               adress:
                   'Parcelles  Assainies U21 Villa 201 Telephone : 775545675 , Dakar',
             ),
-/*            ,
             SizedBox(height: 10),
             TopCategories(),
             SizedBox(height: 10),
             CarouselImage(),
-            DealOfDay(), */
+            SizedBox(height: 10),
+            DealOfDay(),
           ],
         ),
       ),
