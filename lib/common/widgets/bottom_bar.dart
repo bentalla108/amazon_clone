@@ -1,9 +1,10 @@
 import 'package:amazon_clone/constants/global_variables.dart';
+import 'package:amazon_clone/features/account/account_screen.dart';
 
 import 'package:amazon_clone/features/home/screens/home_screen.dart';
 
-/* import 'package:badges/badges.dart';
- */
+import 'package:badges/badges.dart' as badge;
+
 import 'package:flutter/material.dart';
 
 class BottomBar extends StatefulWidget {
@@ -21,6 +22,10 @@ class _BottomBarState extends State<BottomBar> {
 
   List<Widget> pages = [
     const HomeScreen(),
+    const AccountScreen(),
+    const Center(
+      child: Text('Page3'),
+    ),
   ];
 
   void updatePage(int page) {
@@ -86,18 +91,28 @@ class _BottomBarState extends State<BottomBar> {
           // CART
           BottomNavigationBarItem(
             icon: Container(
-              width: bottomBarWidth,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: _page == 2
-                        ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.backgroundColor,
-                    width: bottomBarBorderWidth,
+                width: bottomBarWidth,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                      color: _page == 2
+                          ? GlobalVariables.selectedNavBarColor
+                          : GlobalVariables.backgroundColor,
+                      width: bottomBarBorderWidth,
+                    ),
                   ),
                 ),
-              ),
-            ),
+                child: const badge.Badge(
+                  badgeStyle: badge.BadgeStyle(
+                    badgeColor: Colors.white,
+                    elevation: 0,
+                  ),
+                  badgeContent: Text(
+                    '3',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  child: Icon(Icons.shopping_cart_outlined),
+                )),
             label: '',
           ),
         ],

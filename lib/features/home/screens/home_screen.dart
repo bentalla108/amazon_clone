@@ -1,4 +1,5 @@
 import 'package:amazon_clone/constants/global_variables.dart';
+import 'package:amazon_clone/features/home/widgets/adress.dart';
 
 import 'package:flutter/material.dart';
 
@@ -70,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: 1,
                           ),
                         ),
-                        hintText: 'Search Amazon.in',
+                        hintText: 'Rechercher sur Amazon.fr',
                         hintStyle: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 17,
@@ -93,7 +94,11 @@ class _HomeScreenState extends State<HomeScreen> {
       body: const SingleChildScrollView(
         child: Column(
           children: [
-/*             AddressBox(),
+            AdressBox(
+              adress:
+                  'Parcelles  Assainies U21 Villa 201 Telephone : 775545675 , Dakar',
+            ),
+/*            ,
             SizedBox(height: 10),
             TopCategories(),
             SizedBox(height: 10),
