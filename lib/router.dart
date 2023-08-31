@@ -1,4 +1,5 @@
 import 'package:amazon_clone/common/widgets/bottom_bar.dart';
+import 'package:amazon_clone/features/admin/screen/add_product_screen.dart';
 
 import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
 
@@ -24,11 +25,12 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => const BottomBar(),
       );
-    /* case AddProductScreen.routeName:
+    case AddProductScreen.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const AddProductScreen(),
       );
+    /*
 
     case CategoryDealsScreen.routeName:
       var category = routeSettings.arguments as String;
