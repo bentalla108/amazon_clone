@@ -14,7 +14,8 @@ const DB = "mongodb+srv://bentalla:bentalla@cluster0.jwixwj5.mongodb.net/?retryW
 // middleware
 app.use(express.json());
 app.use(authRouter);
-/* app.use(adminRouter);
+app.use(adminRouter);
+/* 
 app.use(productRouter); */
 /* app.use(userRouter); */
 
