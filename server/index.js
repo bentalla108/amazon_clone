@@ -5,13 +5,14 @@ const dotenv = require('dotenv');
 dotenv.config();
 // IMPORTS FROM OTHER FILES
 const authRouter = require("./routes/auth");
+const adminRouter = require("./routes/admin");
 /* const productRouter = require("./routes/product");
 const userRouter = require("./routes/user");
  */
 // INIT
 const PORT = process.env.PORT || 3000;
 const app = express();
-const DB = process.env.DB;
+const DB = process.env.db;
 // middleware
 app.use(express.json());
 app.use(authRouter);
