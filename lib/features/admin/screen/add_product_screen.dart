@@ -37,14 +37,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
   }
 
   void sellProduct() {
-    if (_addProductFormKey.currentState!.validate()) {
+    if (_addProductFormKey.currentState!.validate() &&
+        imageSelected.isNotEmpty) {
       adminServices.sellProduct(
           context: context,
           name: productNameController.text,
           price: double.parse(priceController.text),
           quantity: double.parse(quantityController.text),
           description: descriptionController.text,
-          category: categories,
+          category: category,
           images: imageSelected);
     }
   }
@@ -53,10 +54,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController priceController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController quantityController = TextEditingController();
-  final AdminService adminServices = AdminService();
+  final AdminServices adminServices = AdminServices();
   final _addProductFormKey = GlobalKey<FormState>();
 
-  String categories = 'Mobiles';
+  String category = 'Mobiles';
   @override
   void dispose() {
     quantityController.dispose();
@@ -159,21 +160,25 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     height: 10,
                   ),
                   CustomTextField(
-                      controller: priceController, hintText: 'Price'),
+                      controller: priceController,
+                      hintText: 'Price',
+                      keyboard: TextInputType.number),
                   const SizedBox(
                     height: 10,
                   ),
                   CustomTextField(
-                      controller: quantityController, hintText: 'Quantity'),
+                      controller: quantityController,
+                      hintText: 'Quantity',
+                      keyboard: TextInputType.number),
                   SizedBox(
                     width: double.infinity,
                     child: DropdownButton(
-                      onChanged: (String? value) {
+                      onChanged: (String? newVal) {
                         setState(() {
-                          categories = value as String;
+                          category = newVal!;
                         });
                       },
-                      value: categories,
+                      value: category,
                       icon: const Icon(Icons.keyboard_arrow_down),
                       items: productCategories.map((String e) {
                         return DropdownMenuItem(
@@ -188,7 +193,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   ),
                   CustomButton(
                     text: 'Vendre',
-                    onTap: () {},
+                    onTap: sellProduct,
                   )
                 ],
               ),

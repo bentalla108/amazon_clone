@@ -133,9 +133,8 @@ class AuthService {
         }
       }
     } catch (e) {
-      if (context.mounted) {
-        showSnackBar(context, e.toString());
-      }
+      if (!context.mounted) return;
+      showSnackBar(context, e.toString());
     }
   }
 }

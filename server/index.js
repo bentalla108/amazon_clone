@@ -1,8 +1,9 @@
 // IMPORTS FROM PACKAGES
+const dotenv = require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
-const dotenv = require('dotenv');
-dotenv.config();
+
+
 // IMPORTS FROM OTHER FILES
 const authRouter = require("./routes/auth");
 const adminRouter = require("./routes/admin");
@@ -10,15 +11,18 @@ const adminRouter = require("./routes/admin");
 const userRouter = require("./routes/user");
  */
 // INIT
-const PORT = process.env.PORT || 3000;
-const app = express();
+const PORT = process.env.PORT || 4000;
 const DB = process.env.db;
+const app = express();
+
+ /* const DB = "mongodb+srv://bentalla:bentalla@cluster0.jwixwj5.mongodb.net/?retryWrites=true&w=majority";*/
 // middleware
 app.use(express.json());
 app.use(authRouter);
 app.use(adminRouter);
 /* 
 app.use(productRouter); */
+/* app.use(userRouter); */
 /* app.use(userRouter); */
 
 // Connections
@@ -32,5 +36,6 @@ mongoose
   });
 
 app.listen(PORT, "0.0.0.0", () => {
+ 
   console.log(`connected at port ${PORT}`);
 });
