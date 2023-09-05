@@ -1,8 +1,10 @@
 import 'package:amazon_clone/constants/loader.dart';
+import 'package:amazon_clone/constants/utils.dart';
 import 'package:amazon_clone/features/admin/screen/add_product_screen.dart';
 import 'package:amazon_clone/features/admin/services/admin_services.dart';
 import 'package:amazon_clone/features/widgets/single_product.dart';
 import 'package:amazon_clone/models/product.dart';
+import 'package:built_value/built_value.dart';
 import 'package:flutter/material.dart';
 
 class PostsScreen extends StatefulWidget {
@@ -24,6 +26,18 @@ class _PostsScreenState extends State<PostsScreen> {
   fetchAllProduct() async {
     products = await adminService.fetchAllProduct(context);
     setState(() {});
+  }
+
+  deleteProduct(Product product, int index) async {
+    adminService.deleteProduct(
+      context: context,
+      product: product,
+      onSucces: () {
+        products!.removeAt(index);
+        showSnackBar(context, 'Product deleted succesfuly...');
+        setState(() {});
+      },
+    );
   }
 
   void navigateAddProduct() {
@@ -61,7 +75,7 @@ class _PostsScreenState extends State<PostsScreen> {
                             ),
                           ),
                           IconButton(
-                            onPressed: () => {},
+                            onPressed: deleteProduct(productData, index),
                             icon: const Icon(
                               Icons.delete_outline,
                             ),
