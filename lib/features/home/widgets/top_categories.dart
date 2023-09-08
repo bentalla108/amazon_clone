@@ -1,7 +1,13 @@
 import 'package:amazon_clone/constants/global_variables.dart';
+import 'package:amazon_clone/features/home/screens/category_deal_screen.dart';
 import 'package:flutter/material.dart';
 
 class TopCategories extends StatelessWidget {
+  void navigateCategoryPage(BuildContext context, String category) {
+    Navigator.pushNamed(context, CategoryDealScreen.routeName,
+        arguments: category);
+  }
+
   const TopCategories({super.key});
 
   @override
@@ -13,26 +19,33 @@ class TopCategories extends StatelessWidget {
           itemCount: GlobalVariables.categoryImages.length,
           itemExtent: 70,
           itemBuilder: (context, index) {
-            return Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
-                    child: Image.asset(
-                      GlobalVariables.categoryImages[index]['image'] as String,
-                      fit: BoxFit.cover,
-                      height: 40,
-                      width: 40,
+            return GestureDetector(
+              onTap: () => {
+                navigateCategoryPage(
+                    context, GlobalVariables.categoryImages[index]['title']!),
+              },
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Image.asset(
+                        GlobalVariables.categoryImages[index]['image']
+                            as String,
+                        fit: BoxFit.cover,
+                        height: 40,
+                        width: 40,
+                      ),
                     ),
                   ),
-                ),
-                Text(
-                  GlobalVariables.categoryImages[index]['title'] as String,
-                  style: const TextStyle(
-                      fontSize: 12, fontWeight: FontWeight.w400),
-                )
-              ],
+                  Text(
+                    GlobalVariables.categoryImages[index]['title'] as String,
+                    style: const TextStyle(
+                        fontSize: 12, fontWeight: FontWeight.w400),
+                  )
+                ],
+              ),
             );
           }),
     );
