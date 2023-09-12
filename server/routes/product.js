@@ -1,6 +1,6 @@
 const express = require('express');
 const productRouter  = express.Router();
-const Product = require('../models/product')
+const {Product} = require('../models/product')
 const auth = require('../middlewares/auth')
 
 
@@ -64,14 +64,14 @@ productRouter.get('/api/deal-of-day' , auth , async(req , res)=>{
    product = product.sort((prodA , prodB) =>{
       let prodA_Sum = 0;
       let prodB_Sum = 0;
-      for(let a = 0 ; a< a.ratings.length ; a++){
+      for(let a = 0 ; a< prodA.ratings.length ; a++){
         prodA_Sum  += prodA.ratings[a].rating
   
       }
     
   
-      for(let b = 0 ; b< a.ratings.length ; b++){
-        prodB_Sum  += prodA.ratings[b].rating
+      for(let b = 0 ; b< prodB.ratings.length ; b++){
+        prodB_Sum  += prodB.ratings[b].rating
   
       }
 

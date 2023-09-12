@@ -1,23 +1,29 @@
+import 'package:amazon_clone/common/widgets/custom_button.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
+import 'package:amazon_clone/features/cart/widget/cart_product.dart';
+import 'package:amazon_clone/features/cart/widget/cart_subtotal.dart';
+import 'package:amazon_clone/features/home/widgets/address_box.dart';
 import 'package:amazon_clone/features/search/screeen/search_screen.dart';
-
+import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  static const String routeName = '/home';
-  const HomeScreen({Key? key}) : super(key: key);
+class CartScreen extends StatefulWidget {
+  const CartScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<CartScreen> createState() => _CartScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _CartScreenState extends State<CartScreen> {
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserProvider>().user;
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -71,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: 1,
                           ),
                         ),
-                        hintText: 'Search Amazon Fr',
+                        hintText: 'Rechercher sur Amazon.fr',
                         hintStyle: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 17,
@@ -91,15 +97,40 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /* AddressBox(),
-            SizedBox(height: 10),
-            TopCategories(),
-            SizedBox(height: 10),
-            CarouselImage(),
-            DealOfDay(), */
+            const AddressBox(),
+            const CartSubTotal(),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomButton(
+                  text: 'Procéder au payement de (${user.cart.length} items)',
+                  onTap: () {},
+                  color: Colors.yellow[600]),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              color: Colors.black12.withOpacity(0.08),
+              height: 2,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            ListView.builder(
+                shrinkWrap: true,
+                itemCount: user.cart.length,
+                itemBuilder: (context, index) {
+                  return CartProduct(
+                    index: index,
+                  );
+                })
           ],
         ),
       ),

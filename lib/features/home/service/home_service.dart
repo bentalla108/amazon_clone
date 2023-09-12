@@ -70,7 +70,9 @@ class HomeService {
       httpErrorHandle(
         response: res,
         context: context,
-        onSuccess: () {},
+        onSuccess: () {
+          product = Product.fromJson(res.body);
+        },
       );
     } catch (e) {
       // ignore: use_build_context_synchronously
