@@ -23,12 +23,12 @@ class _CartProductState extends State<CartProduct> {
     );
   }
 
-  /*  void decreaseQuantity(Product product) {
-    cartServices.removeFromCart(
+  void decreaseQuantity(Product product) {
+    productDetailsServices.removeFromCart(
       context: context,
       product: product,
     );
-  } */
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,11 +103,14 @@ class _CartProductState extends State<CartProduct> {
                   color: Colors.black12,
                 ),
                 child: Row(children: [
-                  Container(
-                    width: 35,
-                    height: 32,
-                    alignment: Alignment.center,
-                    child: const Icon(Icons.remove),
+                  InkWell(
+                    onTap: () => decreaseQuantity(product),
+                    child: Container(
+                      width: 35,
+                      height: 32,
+                      alignment: Alignment.center,
+                      child: const Icon(Icons.remove),
+                    ),
                   ),
                   DecoratedBox(
                     decoration: BoxDecoration(
