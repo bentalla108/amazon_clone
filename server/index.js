@@ -9,6 +9,7 @@ const authRouter = require("./routes/auth");
 const adminRouter = require("./routes/admin");
 const productRouter = require("./routes/product");
 const userRouter = require("./routes/user"); 
+const cors = require('cors')();
  
 // INIT
 const PORT = process.env.PORT || 4000;
@@ -17,6 +18,7 @@ const app = express();
 
  /* const DB = "mongodb+srv://bentalla:bentalla@cluster0.jwixwj5.mongodb.net/?retryWrites=true&w=majority";*/
 // middleware
+app.use(cors)
 app.use(express.json());
 app.use(authRouter);
 app.use(adminRouter);

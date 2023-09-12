@@ -25,13 +25,20 @@ userRouter.post('/api/add-to-cart', auth, async (req, res) => {
             break;
           }
         }
-  
         if (productInCart) {
           const productFoundIndex = user.cart.findIndex((prod) => prod.product._id.equals(product._id));
-          const productFoundCopy = { ...user.cart[productFoundIndex] }; // Crée une copie du produit
+           const productFoundCopy = { ...user.cart[productFoundIndex]._doc };
           productFoundCopy.quantity += 1;
+         
           user.cart[productFoundIndex] = productFoundCopy; // Remplace l'élément dans le panier par la copie mise à jour
-        } else {
+        }
+  
+        /* if (productInCart) {
+          const productFound = user.cart.find((prod) => prod.product._id.equals(product._id));
+
+                  productFound.quantity += 1;
+         
+        }  */else {
           user.cart.push({ product, quantity: 1 });
         }
       }
@@ -45,3 +52,4 @@ userRouter.post('/api/add-to-cart', auth, async (req, res) => {
 
   
   module.exports = userRouter ;
+
