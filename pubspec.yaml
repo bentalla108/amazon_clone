@@ -50,6 +50,10 @@ dependencies:
     git:
       url: https://github.com/bentalla108/flutter-plugin-gpay.git
       path: pay
+  intl:
+  syncfusion_flutter_charts: ^23.1.36
+  fl_chart: ^0.63.0
+
 
 
 dev_dependencies:
