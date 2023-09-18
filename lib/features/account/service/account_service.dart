@@ -40,6 +40,7 @@ class AccountServices {
         },
       );
     } catch (e) {
+      // ignore: use_build_context_synchronously
       showSnackBar(context, e.toString());
     }
     return orderList;
@@ -57,6 +58,7 @@ class AccountServices {
         (route) => false,
       );
     } catch (e) {
+      if (!context.mounted) return;
       showSnackBar(context, e.toString());
     }
   }

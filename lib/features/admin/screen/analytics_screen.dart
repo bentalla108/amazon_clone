@@ -1,7 +1,6 @@
 import 'package:amazon_clone/constants/loader.dart';
 import 'package:amazon_clone/features/admin/models/sales.dart';
 import 'package:amazon_clone/features/admin/services/admin_services.dart';
-import 'package:amazon_clone/features/admin/widget/category_services_chart.dart';
 import 'package:flutter/material.dart';
 
 class AnalyticsScreen extends StatefulWidget {
@@ -44,14 +43,6 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               ),
               SizedBox(
                 height: 250,
-                child: CategoryProductsChart(seriesList: [
-                  charts.Series(
-                    id: 'Sales',
-                    data: earnings!,
-                    domainFn: (Sales sales, _) => sales.label,
-                    measureFn: (Sales sales, _) => sales.earning,
-                  ),
-                ]),
               )
             ],
           );
