@@ -3,6 +3,7 @@ const auth = require('../middlewares/auth');
 const {Product , productSchema} = require('../models/product')
 const userRouter  = express.Router();
 const User = require('../models/user')
+const Order = require('../models/order')
 
 
 
@@ -80,6 +81,9 @@ userRouter.delete('/api/remove-from-cart/:id', auth, async (req, res) => {
       res.status(500).json({ error: e.message });
     }
   });
+
+
+
   userRouter.post("/api/save-user-address", auth, async (req, res) => {
     try {
       const { address } = req.body;
@@ -92,16 +96,7 @@ userRouter.delete('/api/remove-from-cart/:id', auth, async (req, res) => {
     }
   });
   
-  userRouter.post("/api/sorder", auth, async (req, res) => {
-    try {
-      const { address , cart ,  } = req.body;
-      let user = await User.findById(req.user);
-      user = await user.save();
-      res.json(user);
-    } catch (e) {
-      res.status(500).json({ error: e.message });
-    }
-  });
+ 
   userRouter.post("/api/order", auth, async (req, res) => {
     try {
       const { cart, totalPrice, address } = req.body;

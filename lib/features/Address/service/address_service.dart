@@ -42,6 +42,7 @@ class AddressServices {
         },
       );
     } catch (e) {
+      if (!context.mounted) return;
       showSnackBar(context, e.toString());
     }
   }
@@ -79,6 +80,7 @@ class AddressServices {
         },
       );
     } catch (e) {
+      // ignore: use_build_context_synchronously
       showSnackBar(context, e.toString());
     }
   }
@@ -111,6 +113,7 @@ class AddressServices {
         },
       );
     } catch (e) {
+      // ignore: use_build_context_synchronously
       showSnackBar(context, e.toString());
     }
   }

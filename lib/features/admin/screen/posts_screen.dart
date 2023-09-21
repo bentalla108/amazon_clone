@@ -55,33 +55,38 @@ class _PostsScreenState extends State<PostsScreen> {
                 ),
                 itemBuilder: (context, index) {
                   final productData = products![index];
-                  return Column(
-                    children: [
-                      SizedBox(
-                        height: 140,
-                        child: SingleProduct(
-                          image: productData.images[0],
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 140,
+                          child: SingleProduct(
+                            image: productData.images[0],
+                          ),
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              productData.name,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                productData.name,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              ),
                             ),
-                          ),
-                          IconButton(
-                            onPressed: deleteProduct(productData, index),
-                            icon: const Icon(
-                              Icons.delete_outline,
+                            IconButton(
+                              onPressed: () {
+                                deleteProduct(productData, index);
+                              },
+                              icon: const Icon(
+                                Icons.delete_outline,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   );
                 }),
             floatingActionButton: FloatingActionButton(

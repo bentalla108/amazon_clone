@@ -49,7 +49,6 @@ class AuthService {
         },
       );
     } catch (e) {
-      if (!context.mounted) return; // To remove or find good methode
       showSnackBar(context, e.toString());
     }
   }
@@ -71,19 +70,19 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
-      if (!context.mounted) return; // To remove or find good methode
+      // To remove or find good methode
+      // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,
         onSuccess: () async {
           SharedPreferences prefs = await SharedPreferences.getInstance();
 
-          if (context.mounted) {
-            Provider.of<UserProvider>(context, listen: false).setUser(res.body);
-            await prefs.setString(
-                'x-auth-token', jsonDecode(res.body)['token']);
-          }
-          if (!context.mounted) return;
+          // ignore: use_build_context_synchronously
+          Provider.of<UserProvider>(context, listen: false).setUser(res.body);
+          await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
+
+          // ignore: use_build_context_synchronously
           Navigator.pushNamedAndRemoveUntil(
             context,
             BottomBar.routeName,
@@ -92,6 +91,7 @@ class AuthService {
         },
       );
     } catch (e) {
+      // ignore: use_build_context_synchronously
       showSnackBar(context, e.toString());
     }
   }

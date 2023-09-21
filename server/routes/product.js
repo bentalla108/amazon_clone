@@ -56,35 +56,35 @@ productRouter.post("/api/rate-product", auth, async (req, res) => {
 });
 
 
-productRouter.get('/api/deal-of-day' , auth , async(req , res)=>{
+productRouter.get("/api/deal-of-day", auth, async (req, res) => {
   try {
-  
-    let product = await Product.find({});
+    let products = await Product.find({});
 
-   product = product.sort((prodA , prodB) =>{
+    products = products.sort((prodA, prodB) => {
       let prodA_Sum = 0;
       let prodB_Sum = 0;
-      for(let a = 0 ; a< prodA.ratings.length ; a++){
-        prodA_Sum  += prodA.ratings[a].rating
-  
-      }
-    
-  
-      for(let b = 0 ; b< prodB.ratings.length ; b++){
-        prodB_Sum  += prodB.ratings[b].rating
-  
+
+      for (let a = 0; a < prodA.ratings.length; a++) {
+        prodA_Sum += prodA.ratings[a].rating;
       }
 
-      return prodA_Sum < prodB_Sum ? 1 :-1;
+      for (let b = 0; b < prodB.ratings.length; b++) {
+        prodB_Sum += prodB.ratings[b].rating;
+      }
+
+      return prodA_Sum > prodB_Sum ? -1 : 1; // Tri inversé
     });
 
+    if (products.length === 0) {
+      return res.status(404).json({ msg: "Aucun produit n'a été trouvé." });
+    }
 
-    res.json(product[0]);
+    res.json(products[0]);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
+});
 
-})
 
 
 
