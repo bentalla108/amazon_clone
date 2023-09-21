@@ -127,13 +127,10 @@ class AuthService {
           },
         );
 
-        if (context.mounted) {
-          var userProvider = Provider.of<UserProvider>(context, listen: false);
-          userProvider.setUser(userRes.body);
-        }
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.setUser(userRes.body);
       }
     } catch (e) {
-      if (!context.mounted) return;
       showSnackBar(context, e.toString());
     }
   }
